@@ -12,7 +12,7 @@ https://user-images.githubusercontent.com/50634523/178560619-cdfbc4ea-2307-4989-
 
 You can also generate a report by installing mochawesome report generator
 Below are the commands:
-npm i mochawesome-report-generator \n
+npm i mochawesome-report-generator
 npm i mochawesome-merge 
 npm i mochawesome
 npx cypress run --reporter mochawesome 
