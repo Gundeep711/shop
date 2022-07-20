@@ -29,9 +29,8 @@
       classObj.viewingDescription('About this item') //confirm user is on description page by looking a keyword
 
       // second way to confirm user is on description page
-      if (cy.contains('Buy now')) {
+      cy.contains('Buy now')
         cy.log('passed: user can view product details')
-      }
 
       classObj.getquantity() //getting quatity on description page
 
