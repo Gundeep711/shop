@@ -70,7 +70,18 @@ itemCountLocator = '.sc-buy-box-inner-box > .a-spacing-mini';
     cy.get(this.continueLocator).click()
   }
   cookiesButton(){
-    cy.get(this.cookieBtnLocator).click()
+    
+    cy.get('body').then(($loc) => {
+
+      if($loc.find(this.cookieBtnLocator).length >0){
+        cy.get(this.cookieBtnLocator).click()
+      }
+      else{
+        cy.log('Button did not appear')
+        cy.get(this.continueLocator).click()
+      }
+    })
+    
   }
   errMsg(){
     cy.get(this.errMsgLocator).invoke('text').should((err) => {
