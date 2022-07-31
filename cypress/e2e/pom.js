@@ -79,6 +79,7 @@ itemCountLocator = '.sc-buy-box-inner-box > .a-spacing-mini';
       else{
         cy.log('Button did not appear')
         cy.get(this.continueLocator).click()
+        cy.get('.a-button-text').click()
       }
     })
     

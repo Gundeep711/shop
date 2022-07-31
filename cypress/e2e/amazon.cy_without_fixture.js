@@ -1,14 +1,7 @@
-import { cartExercise } from "./pom"
+  import { cartExercise } from "./pom"
   const classObj = new cartExercise()
-  var data1 ;
+
   describe('Scenario 1', () => {
-    
-    before(function(){
-      //access fixture data
-      cy.fixture('example.json').then(function(data){
-         data1 = data
-      })
-   })
 
     it('Case 1 - User can access a home page', () => {
 
@@ -18,21 +11,21 @@ import { cartExercise } from "./pom"
 
       classObj.navigateHome() //navigating to home page
 
-      classObj.urlLookup('_ref', data1.urlKeyword) //confirm user is viewing home page
+      classObj.urlLookup('_ref', 'nav_cs_home') //confirm user is viewing home page
     });
 
     it('Case 2 - User can search and view the product', () => {
 
-      classObj.searchProduct(data1.searchString) //searching product
+      classObj.searchProduct('iPad') //searching product
 
-      classObj.viewingProductList(data1.resultsString) //confirm user is viewing searched product list
+      classObj.viewingProductList('results') //confirm user is viewing searched product list
     });
 
     it('Case 3 -  User can view product details', () => {
 
       classObj.selectProduct() // selecting product from the list retrieved
 
-      classObj.viewingDescription(data1.descString) //confirm user is on description page by looking a keyword
+      classObj.viewingDescription('About this item') //confirm user is on description page by looking a keyword
 
       // second way to confirm user is on description page
       cy.contains('Buy now')
@@ -52,7 +45,7 @@ import { cartExercise } from "./pom"
       cy.wait(2000)
 
       //checking for apple care
-      cy.contains(data1.AppleCare) 
+      cy.contains('AppleCare+') 
       classObj.noCoverageButton()
       cy.wait(3000)
       
@@ -60,14 +53,14 @@ import { cartExercise } from "./pom"
       // checking add to cart confirmation (if needed)
       cy.get('body').then(($bod) => {
         if($bod.find('h5').length > 0 ){
-          cy.get('h5').should('contain', data1.confirmString)
+          cy.get('h5').should('contain', 'Please confirm')
           
           classObj.confirmAddToCartButton() //confirming add to cart
 
-          classObj.checkItemCount(data1.itemConfirmation) //checking successfully added
+          classObj.checkItemCount('1 item') //checking successfully added
         }
         else{
-          classObj.addToCartConfirmationContainer(data1.cartConfirmation) // looking for Added to cart message
+          classObj.addToCartConfirmationContainer('Added to Cart') // looking for Added to cart message
 
           classObj.goToCart() // clicking add to cart button
         }
@@ -86,12 +79,12 @@ import { cartExercise } from "./pom"
 
       classObj.proceedToCheckout()// clicking proceed to checkout button
 
-      classObj.urlLookup('pageID', data1.checkoutUrl) //confirming user is on checkout page
+      classObj.urlLookup('pageID', 'checkout') //confirming user is on checkout page
     });
 
     it('Case 7 - Entering invalid/bad data results in displaying error message', () => {
 
-      classObj.emailTextBox(data1.emailcheck) // entering invalid Email
+      classObj.emailTextBox('test.ca') // entering invalid Email
 
       classObj.continueSignInButton() //continue button
 
